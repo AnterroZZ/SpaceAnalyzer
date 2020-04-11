@@ -31,5 +31,6 @@ if __name__ == '__main__':
     else:
         os.system("export FLASK_APP=analyzer.py") 
         os.system("export FLASK_DEBUG=1")
-    app.run(debug=True)
     webbrowser.open('http://localhost:5000', new=2)
+    app.run(debug=True)
+    
