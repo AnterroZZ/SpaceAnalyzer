@@ -23,7 +23,7 @@ def about():
     return "<h1>About Page</h1>"
 
 
-
+                
 if __name__ == '__main__':
     if os.name is 'nt':
         os.system("set FLASK_APP=analyzer.py") 
