@@ -2,34 +2,39 @@ import os
 
 directory_sizes_dict = {}
 
-def get_size(start_path = ".", value_to_beat= 20000):
-    did_add = "no"
+def get_size(start_path = ".", did_add=True):
+    paths_names = os.listdir(start_path)
     for root, dirnames, filenames in os.walk(start_path):
-        print(dirnames)
+        size_kb = 0
+        sub_size = 0
+        print(f"FOR {root}")
         if not dirnames:
-            return did_add
-        for dirs in dirnames:  
-            total_size = 0 
-            size_mb = 0
-            if dirs in os.listdir(start_path):
-                path = os.path.join(root,dirs)
-                for r, d, ff in os.walk(path): 
-                    for f in ff:
-                        ffile = os.path.join(r,f)
-                        total_size += os.path.getsize(ffile)
-                    size_mb = round(total_size / 10 **6)
-                    value_to_beat /= 2
-                if(size_mb >= 10000):
-                    if get_size(path, value_to_beat) is "no":
-                        print(f"Adding {dirs} folder to dictonary")
-                        directory_sizes_dict.update({path: size_mb})
-                else:
-                    print(f"Adding {dirs} folder to dictonary")
-                    directory_sizes_dict.update({path: size_mb})
-                    did_add = "yes"
+            sub_size = 0
+        else:  
+            for d in dirnames:
+                dp = os.path.join(root,d)
+                print(dp)
+                sub_size += get_size(dp)
+                print(f"{dp} is adding {sub_size}")
+        for f in filenames:
+            fp = os.path.join(root,f)
+            if not os.path.islink(fp):
+                size_kb += os.path.getsize(fp)
+        size_mb = round( size_kb / 10**6 )
+        print(sub_size)
+        print(size_mb)
+        if sub_size == 0:
+            if(did_add):
+                return size_mb
+            elif size_mb > 10000:
+                print(f"The size for {root} is {size_mb+sub_size}")
+                directory_sizes_dict.update({root: size_mb+sub_size})
+        elif sub_size < 10000:
+            print(f"The size for {root} is {size_mb+sub_size}")
+            directory_sizes_dict.update({root: size_mb+sub_size})
                 
 
 
 if __name__ == '__main__':  
-    get_size('D:\GOPRO\GoPro\Białka', 20000)
+    get_size('D:\GOPRO\GoPro\Białka',False)
     print(directory_sizes_dict)
