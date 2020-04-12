@@ -22,17 +22,18 @@ def get_size(start_path = ".", did_add=True):
         print(f"Total size for {root} is {size_mb}mb in files and {sub_size}mb in subfolders")
         if did_add:
             return size_mb + sub_size
-        elif sub_size < 10000 and size_mb + sub_size > 10000:
+        elif sub_size < 5000 and size_mb + sub_size > 5000:
             # print(f"The size for {root} is {size_mb+sub_size}")      
             directory_sizes_dict.update({root: size_mb+sub_size})
                 
 
 
 if __name__ == '__main__':  
-    get_size('D:\GOPRO',False)
+    get_size('/Users/KnowsHow/Zdjęcia i Video',False)
 
-    directory_sizes_dict = dict(sorted(directory_sizes_dict.items(), key= lambda x: [x[1], x[0]], reverse=False))
-    plt.barh(range(len(directory_sizes_dict)), list(directory_sizes_dict.values()), align='center')
-    plt.title('Folders taking the most space')
+    x, y = zip(*sorted(directory_sizes_dict.items(), key= lambda x: [x[1], x[0]], reverse=False))
+    plt.barh(x,y)
+    plt.title('Biggest sized folders')
     plt.xlabel('Size')
+    plt.tight_layout()
     plt.show()
