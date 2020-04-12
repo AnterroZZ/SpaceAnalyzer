@@ -1,3 +1,2 @@
- x = 13533962614
- x /= round(10**6)
- print(x)
+graphs/
+__pycache__
