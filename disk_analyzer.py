@@ -29,11 +29,15 @@ def get_size(start_path = ".", did_add=True):
 
 
 if __name__ == '__main__':  
-    get_size('/Users/KnowsHow/Zdjęcia i Video',False)
+    get_size('D:\GOPRO',False)
 
     x, y = zip(*sorted(directory_sizes_dict.items(), key= lambda x: [x[1], x[0]], reverse=False))
+    plt.figure(figsize=(10,5))
     plt.barh(x,y)
+    print(x)
+    print(y)
     plt.title('Biggest sized folders')
     plt.xlabel('Size')
     plt.tight_layout()
-    plt.show()
+    plt.savefig("graphs/siema.png")
+    
