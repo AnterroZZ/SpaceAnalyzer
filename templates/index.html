@@ -1,0 +1,32 @@
+{% extends 'default_layout.html' %}
+{% block title %}
+    Space Analyzer
+{% endblock %}
+
+{% block content %}
+    <header style="background-image: url(static/pic/background.jpg)">
+        <h2>Your own</h2>
+        <h1>Space Analyzer</h1>
+    </header>
+
+    <main id="container">
+
+        <div class="content">
+            <h2>Folders</h2>
+            <p>Seems like these are the most problematic ones, maybe consider deleting something frome here</p>
+            <img src={{url_for('static', filename='graphs/folder_sizes.png')}} />
+        </div> <br>
+        
+        <div class="content">
+            <h2>Files</h2>
+            <p>Seems like these are the most problematic ones, maybe consider deleting some of those</p>
+            <img src={{url_for('static', filename='graphs/files_sizes.png')}} />
+        </div>
+        
+    </main>
+
+    <footer>
+        Space Analyzer - Take a minute and learn how to free some space on your computer &copy; All rights reserved 
+    </footer>
+{% endblock %}
+

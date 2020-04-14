@@ -58,16 +58,20 @@ if __name__ == '__main__':
     directories, directories_sizes = zip(*sorted(directory_sizes_dict.items(), key= lambda x: [x[1], x[0]], reverse=False))
     files, files_sizes = zip(*sorted(files_sizes_dict.items(), key= lambda x: [x[1], x[0]], reverse=False))
     plt.figure(figsize=(10,5))
+    ax = plt.axes() 
+
     plt.barh(directories,directories_sizes)
     plt.title('Biggest sized folders')
     plt.xlabel('Size')
     plt.tight_layout()
-    plt.savefig("graphs/folder_sizes.png")
+    ax.set_facecolor("white")
+    plt.savefig("graphs/folder_sizes.png", transparent=True)
 
     plt.figure(figsize=(10,5))
     plt.barh(files,files_sizes)
     plt.title('Biggest sized files')
     plt.xlabel('Size')
     plt.tight_layout()
-    plt.savefig("graphs/files_sizes.png")
+    ax.set_facecolor("white")
+    plt.savefig("graphs/files_sizes.png", transparent=True)
     

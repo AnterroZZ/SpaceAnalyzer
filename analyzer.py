@@ -4,7 +4,7 @@ import os
 import webbrowser
 
 #Change this to change directory that you want to be scanned
-scanned_directory = 'D:\Program Files\Epic Games'
+scanned_directory = 'D:\Program Files\Rockstar Games'
 
 #Change these 2 to alter the size of folders and files to be found
 scanned_file_size = 2000
@@ -16,24 +16,12 @@ directory_sizes_dict = {}
 files_sizes_dict = {}
 sub_list = []
 
-posts = [
-    {
-        'author': 'Andrzej Smolinski',
-        'title': 'Blog post 1',
-        'content': 'First post content',
-        'date_posted': 'April 11 2020'
-    }
-]
 
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
-    return render_template('home.html', posts=posts)
-
-@app.route("/about")
-def about():
-    return "<h1>About Page</h1>"
+def home():
+    return render_template('index.html')
 
 def get_size(start_path = ".", did_add=True, dir_size=10000, file_size=2000):
     paths_names = os.listdir(start_path)
@@ -90,14 +78,14 @@ if __name__ == '__main__':
     plt.title('Biggest sized folders')
     plt.xlabel('Size')
     plt.tight_layout()
-    plt.savefig("graphs/folder_sizes.png")
+    plt.savefig("static/graphs/folder_sizes.png")
 
     plt.figure(figsize=(10,5))
     plt.barh(files,files_sizes)
     plt.title('Biggest sized files')
     plt.xlabel('Size')
     plt.tight_layout()
-    plt.savefig("graphs/files_sizes.png")
+    plt.savefig("static/graphs/files_sizes.png")
 
 
     if os.name is 'nt':
@@ -107,5 +95,5 @@ if __name__ == '__main__':
         os.system("export FLASK_APP=analyzer.py") 
         os.system("export FLASK_DEBUG=1")
     webbrowser.open('http://localhost:5000', new=2)
-    app.run(debug=True)
+    app.run(debug=False)
     
