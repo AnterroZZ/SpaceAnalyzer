@@ -4,7 +4,7 @@ import os
 import webbrowser
 
 #Change this to change directory that you want to be scanned
-scanned_directory = 'D:\Program Files\Rockstar Games'
+scanned_directory = 'D:\Program Files (x86)'
 
 #Change these 2 to alter the size of folders and files to be found
 scanned_file_size = 2000
